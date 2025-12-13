@@ -1,12 +1,5 @@
 {
-  "*.ts": [
-    "eslint --fix",
-    "prettier --write"
-  ],
-  "*.json": [
-    "prettier --write"
-  ],
-  "*.md": [
-    "prettier --write"
-  ]
+  "*.ts": ["eslint --fix", "prettier --write", "npm run check-type"],
+  "*.json": ["prettier --write"],
+  "*.md": ["prettier --write"]
 }
