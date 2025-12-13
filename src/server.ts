@@ -1,8 +1,6 @@
 import { serve } from '@hono/node-server';
 import app from '@/index';
 
-console.log('--------aaaa---------');
-
 const server = serve(app);
 
 // graceful shutdown
