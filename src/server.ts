@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import { serve } from '@hono/node-server';
 import app from '@/app';
-import { AppDataSource } from '@/data-source';
+import { AppDataSource } from '@/dataSource/dataSource.sqlite';
 
 const port = Number(process.env.PORT || 3000);
 

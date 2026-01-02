@@ -2,18 +2,31 @@ import { Transactional } from '@/decorators/transactional';
 import { Repository } from 'typeorm';
 import { Game } from '@/modules/game/domain/game.entity';
 import { GetGameInputDto, GetGameOutputDto } from '@/modules/game/service/dto/getGame.dto';
+import type { UserFacade } from '@/modules/user/facade/user.facade';
 
 export class GameService {
-  constructor(private readonly gameRepository: Repository<Game>) {}
+  constructor(
+    private readonly gameRepository: Repository<Game>,
+    private readonly userFacade: UserFacade,
+  ) {}
 
   @Transactional()
   async getGame({ gameId }: GetGameInputDto): Promise<GetGameOutputDto> {
-    console.log('Fetching game with ID:', gameId);
-    const game = await this.gameRepository.findOne({ where: { id: gameId } });
+    const game = await this.gameRepository.findOne({
+      where: { id: gameId },
+      relations: { scores: true },
+    });
     if (!game) {
       throw new Error('Game not found');
     }
-    const { id, groupId, scores } = game;
-    return { id, groupId, scores };
+
+    return {
+      id: game.id,
+      groupId: game.groupId,
+      scores: game.scores.map((score) => ({
+        userId: score.userId,
+        point: score.point,
+      })),
+    };
   }
 }

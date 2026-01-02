@@ -1,24 +1,25 @@
 import { Game } from '@/modules/game/domain/game.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class Score {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'integer', name: 'id', comment: 'スコアID' })
   id!: number;
 
-  @Column('integer')
+  @Column({ type: 'integer', name: 'user_id', comment: 'ユーザーID' })
   userId!: number;
 
-  @Column('integer')
-  points!: number;
+  @Column({ type: 'integer', name: 'point', comment: 'ポイント' })
+  point!: number;
 
   @ManyToOne(() => Game, (game) => game.scores)
+  @JoinColumn([{ name: 'game_id', referencedColumnName: 'id' }])
   game!: Game;
 
-  constructor(id: number, userId: number, points: number, game: Game) {
+  constructor(id: number, userId: number, point: number, game: Game) {
     this.id = id;
     this.userId = userId;
-    this.points = points;
+    this.point = point;
     this.game = game;
   }
 }

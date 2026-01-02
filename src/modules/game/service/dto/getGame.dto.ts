@@ -7,6 +7,6 @@ export interface GetGameOutputDto {
   groupId: number;
   scores: {
     userId: number;
-    points: number;
+    point: number;
   }[];
 }

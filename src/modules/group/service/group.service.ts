@@ -8,7 +8,6 @@ export class GroupService {
 
   @Transactional()
   async getGroup({ groupId }: GetGroupInputDto): Promise<GetGroupOutputDto> {
-    console.log('Fetching group with ID:', groupId);
     const group = await this.groupRepository.findOneBy({ id: Number(groupId) });
     if (!group) {
       throw new Error('Group not found');
@@ -16,7 +15,6 @@ export class GroupService {
     return {
       id: group.id,
       name: group.name,
-      memberIds: group.memberIds,
     };
   }
 }

@@ -8,7 +8,6 @@ export class UserService {
 
   @Transactional()
   async getUser({ userId }: GetUserInputDto): Promise<GetUserOutputDto> {
-    console.log('Fetching user with ID:', userId);
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) {
       throw new Error('User not found');

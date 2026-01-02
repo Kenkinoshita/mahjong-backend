@@ -5,5 +5,4 @@ export interface GetGroupInputDto {
 export interface GetGroupOutputDto {
   id: number;
   name: string;
-  memberIds: number[];
 }
