@@ -2,6 +2,7 @@ import { Transactional } from '@/decorators/transactional';
 import { Repository } from 'typeorm';
 import { Group } from '@/modules/group/domain/group.entity';
 import { GetGroupInputDto, GetGroupOutputDto } from '@/modules/group/service/dto/getGroup.dto';
+import { ApiError } from '@/errors/apiError';
 
 export class GroupService {
   constructor(private readonly groupRepository: Repository<Group>) {}
@@ -9,9 +10,8 @@ export class GroupService {
   @Transactional()
   async getGroup({ groupId }: GetGroupInputDto): Promise<GetGroupOutputDto> {
     const group = await this.groupRepository.findOneBy({ id: Number(groupId) });
-    if (!group) {
-      throw new Error('Group not found');
-    }
+    if (!group) throw ApiError.notFound('Group not found');
+
     return {
       id: group.id,
       name: group.name,
