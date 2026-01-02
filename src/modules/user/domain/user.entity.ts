@@ -14,10 +14,10 @@ export class User {
   @Column({ type: 'text', name: 'password', comment: 'パスワード（ハッシュ化済み）' })
   password!: string;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', comment: '作成日時' })
+  @CreateDateColumn({ name: 'created_at', type: 'datetime', comment: '作成日時' })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', comment: '更新日時' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime', comment: '更新日時' })
   updatedAt!: Date;
 
   constructor(id: number, name: string, email: string, password: string = '') {

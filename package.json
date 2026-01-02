@@ -11,7 +11,11 @@
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"**/*.{ts,js,json,md}\"",
     "check-type": "tsc --noEmit -p tsconfig.json",
-    "test": "vitest"
+    "test": "vitest",
+    "typeorm:sqlite": "tsx ./node_modules/typeorm/cli.js -d src/dataSource/dataSource.sqlite.ts",
+    "migration:generate:sqlite": "npm run typeorm:sqlite -- migration:generate",
+    "migration:run:sqlite": "npm run typeorm:sqlite -- migration:run",
+    "migration:revert:sqlite": "npm run typeorm:sqlite -- migration:revert"
   },
   "dependencies": {
     "@hono/node-server": "1.19.7",

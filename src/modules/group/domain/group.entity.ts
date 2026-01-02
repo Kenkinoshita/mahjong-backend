@@ -15,10 +15,10 @@ export class Group {
   @OneToMany(() => Membership, (membership) => membership.group)
   memberShips!: Membership[];
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone', comment: '作成日時' })
+  @CreateDateColumn({ name: 'created_at', type: 'datetime', comment: '作成日時' })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone', comment: '更新日時' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime', comment: '更新日時' })
   updatedAt!: Date;
 
   constructor(id: number, name: string, memberShips: Membership[]) {

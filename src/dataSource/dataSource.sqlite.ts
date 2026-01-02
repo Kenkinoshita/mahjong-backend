@@ -5,9 +5,12 @@ import { Membership } from '@/modules/group/domain/memberShip.entity';
 import { User } from '@/modules/user/domain/user.entity';
 import { DataSource } from 'typeorm';
 
+const __dirname = import.meta.dirname;
+
 export const AppDataSource = new DataSource({
   type: 'better-sqlite3',
   database: 'database.sqlite',
   logging: true,
   entities: [User, Game, Score, Group, Membership],
+  migrations: [__dirname + '/migrations/**/*{.js,.ts}'],
 });

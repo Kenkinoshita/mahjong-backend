@@ -1,7 +1,7 @@
 import { Game } from '@/modules/game/domain/game.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
-@Entity()
+@Entity('scores')
 export class Score {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id', comment: 'スコアID' })
   id!: number;
@@ -12,7 +12,7 @@ export class Score {
   @Column({ type: 'integer', name: 'point', comment: 'ポイント' })
   point!: number;
 
-  @ManyToOne(() => Game, (game) => game.scores)
+  @ManyToOne(() => Game, (game) => game.scores, { nullable: false })
   @JoinColumn([{ name: 'game_id', referencedColumnName: 'id' }])
   game!: Game;
 
