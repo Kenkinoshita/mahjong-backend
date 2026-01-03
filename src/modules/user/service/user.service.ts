@@ -11,6 +11,12 @@ export class UserService {
   async getUser({ userId }: GetUserInputDto): Promise<GetUserOutputDto> {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) throw ApiError.notFound('User not found');
-    return { id: user.id, name: user.name, email: user.email };
+    return { id: user.id, name: user.name, email: user.email, password: user.password };
+  }
+
+  async getUserByEmail(email: string): Promise<GetUserOutputDto | null> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) return null;
+    return { id: user.id, name: user.name, email: user.email, password: user.password };
   }
 }

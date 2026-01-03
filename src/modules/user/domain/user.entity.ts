@@ -20,7 +20,7 @@ export class User {
   @UpdateDateColumn({ name: 'updated_at', type: 'datetime', comment: '更新日時' })
   updatedAt!: Date;
 
-  constructor(id: number, name: string, email: string, password: string = '') {
+  constructor(id: number, name: string, email: string, password: string) {
     this.id = id;
     this.name = name;
     this.email = email;

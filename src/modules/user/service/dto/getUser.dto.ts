@@ -6,4 +6,5 @@ export type GetUserOutputDto = {
   id: number;
   name: string;
   email: string;
+  password: string;
 };
