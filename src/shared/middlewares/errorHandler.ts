@@ -1,5 +1,5 @@
 import type { Context } from 'hono';
-import { ApiError, statusByCode } from '@/errors/apiError';
+import { ApiError, statusByCode } from '@/shared/errors/apiError';
 
 type ErrorResponseBody = {
   error: {

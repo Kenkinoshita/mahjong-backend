@@ -1,8 +1,8 @@
-import { Transactional } from '@/decorators/transactional';
+import { Transactional } from '@/shared/decorators/transactional';
 import { Repository } from 'typeorm';
 import { Group } from '@/modules/group/domain/group.entity';
 import { GetGroupInputDto, GetGroupOutputDto } from '@/modules/group/service/dto/getGroup.dto';
-import { ApiError } from '@/errors/apiError';
+import { ApiError } from '@/shared/errors/apiError';
 
 export class GroupService {
   constructor(private readonly groupRepository: Repository<Group>) {}

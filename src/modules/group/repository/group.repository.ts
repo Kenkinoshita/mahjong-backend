@@ -1,6 +1,6 @@
 import { AppDataSource } from '@/dataSource/dataSource.sqlite';
 import { Group } from '@/modules/group/domain/group.entity';
-import { txStore } from '@/stores/transaction.store';
+import { txStore } from '@/shared/stores/transaction.store';
 import type { FindManyOptions, FindOneOptions } from 'typeorm';
 
 const originalRepository = AppDataSource.getRepository(Group);

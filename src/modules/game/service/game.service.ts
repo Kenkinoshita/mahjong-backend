@@ -1,9 +1,9 @@
-import { Transactional } from '@/decorators/transactional';
+import { Transactional } from '@/shared/decorators/transactional';
 import { Repository } from 'typeorm';
 import { Game } from '@/modules/game/domain/game.entity';
 import { GetGameInputDto, GetGameOutputDto } from '@/modules/game/service/dto/getGame.dto';
 import type { UserFacade } from '@/modules/user/facade/user.facade';
-import { ApiError } from '@/errors/apiError';
+import { ApiError } from '@/shared/errors/apiError';
 
 export class GameService {
   constructor(

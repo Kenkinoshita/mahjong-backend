@@ -1,7 +1,7 @@
 import { AppDataSource } from '@/dataSource/dataSource.sqlite';
-import type { TxStore } from '@/stores/transaction.store';
-import { txStore } from '@/stores/transaction.store';
-import type { FunctionLike } from '@/types/utilityTypes';
+import type { TxStore } from '@/shared/stores/transaction.store';
+import { txStore } from '@/shared/stores/transaction.store';
+import type { FunctionLike } from '@/shared/types/utilityTypes';
 import type { EntityManager } from 'typeorm';
 
 type Propagation = 'REQUIRED' | 'REQUIRES_NEW';

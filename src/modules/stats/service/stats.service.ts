@@ -1,4 +1,4 @@
-import { Transactional } from '@/decorators/transactional';
+import { Transactional } from '@/shared/decorators/transactional';
 import type { UserFacade } from '@/modules/user/facade/user.facade';
 import type { GameFacade } from '@/modules/game/facade/game.facade';
 import type { GetStatsInputDto, GetStatsOutputDto } from '@/modules/stats/service/dto/getStats.dto';

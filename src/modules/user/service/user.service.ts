@@ -1,5 +1,5 @@
-import { Transactional } from '@/decorators/transactional';
-import { ApiError } from '@/errors/apiError';
+import { Transactional } from '@/shared/decorators/transactional';
+import { ApiError } from '@/shared/errors/apiError';
 import type { User } from '@/modules/user/domain/user.entity';
 import type { GetUserInputDto, GetUserOutputDto } from '@/modules/user/service/dto/getUser.dto';
 import type { Repository } from 'typeorm';
