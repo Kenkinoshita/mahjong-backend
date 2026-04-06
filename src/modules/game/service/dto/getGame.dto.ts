@@ -1,12 +1,12 @@
-export interface GetGameInputDto {
+export type GetGameInputDto = {
   gameId: number;
-}
+};
 
-export interface GetGameOutputDto {
+export type GetGameOutputDto = {
   id: number;
   groupId: number;
   scores: {
     userId: number;
     point: number;
   }[];
-}
+};

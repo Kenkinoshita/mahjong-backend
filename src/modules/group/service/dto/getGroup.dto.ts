@@ -1,8 +1,8 @@
-export interface GetGroupInputDto {
+export type GetGroupInputDto = {
   groupId: number;
-}
+};
 
-export interface GetGroupOutputDto {
+export type GetGroupOutputDto = {
   id: number;
   name: string;
-}
+};

@@ -5,10 +5,15 @@ import { statsRoute } from '@/modules/stats/stats.module';
 import { userRoute } from '@/modules/user/user.module';
 import { errorHandler } from '@/shared/middlewares/errorHandler';
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+
+const allowedOrigins = ['http://localhost:8080'];
 
 const app = new Hono().basePath('/api');
 
 app.onError(errorHandler);
+
+app.use('*', cors({ origin: allowedOrigins, credentials: true }));
 
 app.route('/auth', authRoute);
 
