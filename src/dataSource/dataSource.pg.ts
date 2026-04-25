@@ -1,8 +1,4 @@
-import { Game } from '@/modules/game/domain/game.entity';
-import { Score } from '@/modules/game/domain/score.entity';
-import { Group } from '@/modules/group/domain/group.entity';
-import { Membership } from '@/modules/group/domain/memberShip.entity';
-import { User } from '@/modules/user/domain/user.entity';
+import { appEntities } from '@/dataSource/entities';
 import { DataSource } from 'typeorm';
 import fs from 'fs';
 import { join } from 'path';
@@ -17,6 +13,7 @@ export const PGAppDataSource = new DataSource({
   password: 'sb4pQtaW',
   database: 'mahjong',
   logging: true,
-  entities: [User, Game, Score, Group, Membership],
+  entities: appEntities,
+  migrations: [__dirname + '/migrations/**/*{.js,.ts}'],
   ssl: { ca: fs.readFileSync(join(__dirname, 'ap-northeast-1-bundle.pem')).toString(), rejectUnauthorized: true },
 });

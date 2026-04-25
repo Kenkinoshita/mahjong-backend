@@ -1,4 +1,4 @@
-import { AppDataSource } from '@/dataSource/dataSource.sqlite';
+import { AppDataSource } from '@/dataSource';
 import { Group } from '@/modules/group/domain/group.entity';
 import { txStore } from '@/shared/stores/transaction.store';
 import type { FindManyOptions, FindOneOptions } from 'typeorm';

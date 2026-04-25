@@ -1,4 +1,4 @@
-import { AppDataSource } from '@/dataSource/dataSource.sqlite';
+import { AppDataSource } from '@/dataSource';
 import type { TxStore } from '@/shared/stores/transaction.store';
 import { txStore } from '@/shared/stores/transaction.store';
 import type { FunctionLike } from '@/shared/types/utilityTypes';

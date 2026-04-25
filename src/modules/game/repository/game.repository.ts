@@ -1,4 +1,4 @@
-import { AppDataSource } from '@/dataSource/dataSource.sqlite';
+import { AppDataSource } from '@/dataSource';
 import { Game } from '@/modules/game/domain/game.entity';
 import { txStore } from '@/shared/stores/transaction.store';
 import type { FindManyOptions, FindOneOptions } from 'typeorm';

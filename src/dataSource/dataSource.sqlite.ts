@@ -1,16 +1,12 @@
-import { Game } from '@/modules/game/domain/game.entity';
-import { Score } from '@/modules/game/domain/score.entity';
-import { Group } from '@/modules/group/domain/group.entity';
-import { Membership } from '@/modules/group/domain/memberShip.entity';
-import { User } from '@/modules/user/domain/user.entity';
+import { appEntities } from '@/dataSource/entities';
 import { DataSource } from 'typeorm';
 
 const __dirname = import.meta.dirname;
 
-export const AppDataSource = new DataSource({
+export const SQLiteAppDataSource = new DataSource({
   type: 'better-sqlite3',
   database: 'database.sqlite',
   logging: true,
-  entities: [User, Game, Score, Group, Membership],
+  entities: appEntities,
   migrations: [__dirname + '/migrations/**/*{.js,.ts}'],
 });
