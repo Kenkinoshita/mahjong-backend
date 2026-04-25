@@ -3,3 +3,8 @@ dist
 database.sqlite
 **/*.log
 /.husky/_
+
+# Editor directories and files
+.vscode/*
+!.vscode/settings.sample.json
+.DS_Store

@@ -17,9 +17,10 @@
 
     /* path */
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@common/*": ["./common/src/*"]
     }
   },
-  "include": ["src/**/*", "test/**/*"],
+  "include": ["src/**/*", "test/**/*", "common/src/**/*", "vitest.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

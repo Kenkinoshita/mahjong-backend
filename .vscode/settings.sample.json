@@ -11,6 +11,5 @@
     "strings": true
   },
   "tailwindCSS.suggestions": true,
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "cSpell.words": ["rentai"]
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
