@@ -42,6 +42,7 @@ npm test
 
 ```bash
 npm run migration:generate -n <migration-name>
+# ex) npm run migration:generate -n src/dataSource/migrations/initial
 ```
 
 ### クエリ実行

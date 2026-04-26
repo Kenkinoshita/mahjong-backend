@@ -27,13 +27,13 @@ export class Game {
   @OneToMany(() => Score, (score) => score.game, { cascade: ['insert', 'update', 'remove'] })
   scores!: Score[];
 
-  @Column({ name: 'played_at', type: 'datetime', comment: 'プレイ日時' })
+  @Column({ name: 'played_at', type: 'timestamptz', comment: 'プレイ日時' })
   playedAt!: Date;
 
-  @CreateDateColumn({ name: 'created_at', type: 'datetime', comment: '作成日時' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamptz', comment: '作成日時' })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'datetime', comment: '更新日時' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz', comment: '更新日時' })
   updatedAt!: Date;
 
   constructor(id: number, name: string, uma: Uma, oka: Oka, description: string, groupId: number, playedAt: Date) {
