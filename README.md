@@ -20,6 +20,7 @@ npm install
 ## 開発
 
 ```bash
+cmd/port-foward/dev.sh #踏み台サーバーを経由してDBにアクセスするため
 npm run dev
 ```
 
@@ -40,19 +41,19 @@ npm test
 ### クエリ作成
 
 ```bash
-npm run migration:generate:sqlite -n <migration-name>
+npm run migration:generate -n <migration-name>
 ```
 
 ### クエリ実行
 
 ```bash
-npm run migration:run:sqlite
+npm run migration:run
 ```
 
 ### リバート
 
 ```bash
-npm run migration:revert:sqlite
+npm run migration:revert
 ```
 
 ## 注意
