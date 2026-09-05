@@ -8,3 +8,6 @@ database.sqlite
 .vscode/*
 !.vscode/settings.sample.json
 .DS_Store
+
+# port-forward
+cmd/port-foward/dev.sh
