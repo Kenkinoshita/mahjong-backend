@@ -8,7 +8,12 @@ export const cookieGuard: MiddlewareHandler = async (c, next) => {
   const token = getCookie(c, cookieNames.tokenName);
   if (!token) throw ApiError.unauthorized('Authentication token is missing');
   const tokenManager = new AuthTokenManager(token);
-  const payload = await tokenManager.accessToken.verify();
-  c.set('jwtPayload', payload);
+  try {
+    const payload = await tokenManager.accessToken.verify();
+    c.set('jwtPayload', payload);
+  } catch {
+    throw ApiError.unauthorized('Invalid authentication token');
+  }
+
   return await next();
 };
