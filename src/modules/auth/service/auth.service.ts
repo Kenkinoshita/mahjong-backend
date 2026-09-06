@@ -16,6 +16,7 @@ export class AuthService {
 
     const tokenManager = new AuthTokenManager();
     const token = await tokenManager.generateSignedAccessTokens({ userId: user.id });
-    return { accessToken: token };
+
+    return { accessToken: token, userId: 1 };
   }
 }
