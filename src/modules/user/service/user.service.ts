@@ -12,8 +12,6 @@ export class UserService {
     if (existingUser) throw ApiError.conflict('Email already registered');
 
     const user = User.create({ name, email, password: hashedPassword });
-    user.hoge();
-
     const savedUser = await this.userRepository.save(user);
     return { id: savedUser.id };
   }
@@ -27,7 +25,6 @@ export class UserService {
   async getUserByEmail(email: string): Promise<GetUserOutputDto | null> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) return null;
-    user.hoge();
     return { id: user.id, name: user.name, email: user.email, password: user.password };
   }
 }
