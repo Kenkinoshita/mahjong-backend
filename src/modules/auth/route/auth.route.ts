@@ -1,7 +1,5 @@
-import { registerRequestSchema } from '@/modules/auth/route/schemas/request/registerRequest';
 import type { AuthService } from '@/modules/auth/service/auth.service';
 import type { JWTClaims } from '@/shared/token/access-token';
-import { loginRequestSchema } from '@/modules/auth/route/schemas/request/loginRequest';
 import { Hono } from 'hono';
 import { deleteCookie, setCookie } from 'hono/cookie';
 import type { SuccessResponse } from '@/shared/consts/successResponse';
@@ -9,7 +7,9 @@ import { SUCCESS_RESPONSE } from '@/shared/consts/successResponse';
 import { cookieNames, cookieOptions } from '@/shared/consts/cookie';
 import { requestValidator } from '@/shared/requestValidator';
 import { cookieGuard } from '@/shared/middlewares/cookieGuard';
-import type { CurrentUserResponse } from '@common/schemas/auth/response/CurrentUserResponseSchema';
+import type { CurrentUserResponse } from '@common/schemas/auth/response/currentUserResponseSchema';
+import { loginRequestSchema } from '@common/schemas/auth/request/loginRequestSchema';
+import { registerRequestSchema } from '@common/schemas/auth/request/registerRequestSchema';
 
 function createAuthRoute(service: AuthService) {
   const route = new Hono();

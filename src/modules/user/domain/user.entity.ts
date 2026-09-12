@@ -30,4 +30,8 @@ export class User {
   static create({ name, email, password }: { name: string; email: string; password: string }): User {
     return new User(name, email, password);
   }
+
+  hoge() {
+    console.log('This is a placeholder method.');
+  }
 }
