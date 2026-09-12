@@ -1,8 +1,13 @@
+import type { CreateUserInputDto, CreateUserOutputDto } from '@/modules/user/facade/dto/createUser.dto';
 import type { GetUserForLoginInputDto, GetUserForLoginOutputDto } from '@/modules/user/facade/dto/getUserForLogin.dto';
 import type { UserService } from '@/modules/user/service/user.service';
 
 export class UserFacade {
   constructor(private readonly userService: UserService) {}
+
+  async createUser(input: CreateUserInputDto): Promise<CreateUserOutputDto> {
+    return this.userService.createUser(input);
+  }
 
   async getUserForLogin({ email }: GetUserForLoginInputDto): Promise<GetUserForLoginOutputDto | null> {
     const user = await this.userService.getUserByEmail(email);

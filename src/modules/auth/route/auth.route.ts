@@ -1,3 +1,4 @@
+import { registerRequestSchema } from '@/modules/auth/route/schemas/request/registerRequest';
 import type { AuthService } from '@/modules/auth/service/auth.service';
 import type { JWTClaims } from '@/shared/token/access-token';
 import { loginRequestSchema } from '@/modules/auth/route/schemas/request/loginRequest';
@@ -15,6 +16,13 @@ function createAuthRoute(service: AuthService) {
 
   route.get('/me', cookieGuard, (c) => {
     const { userId } = c.get('jwtPayload') as JWTClaims;
+    return c.json<CurrentUserResponse>({ userId });
+  });
+
+  route.post('/register', requestValidator('json', registerRequestSchema), async (c) => {
+    const { name, email, password } = c.req.valid('json');
+    const { accessToken, userId } = await service.register({ name, email, password });
+    setCookie(c, cookieNames.tokenName, accessToken, cookieOptions);
     return c.json<CurrentUserResponse>({ userId });
   });
 
