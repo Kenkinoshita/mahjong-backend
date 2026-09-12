@@ -16,10 +16,13 @@ export class Score {
   @JoinColumn([{ name: 'game_id', referencedColumnName: 'id' }])
   game!: Game;
 
-  constructor(id: number, userId: number, point: number, game: Game) {
-    this.id = id;
+  private constructor(userId: number, point: number, game: Game) {
     this.userId = userId;
     this.point = point;
     this.game = game;
+  }
+
+  static create({ userId, point, game }: { userId: number; point: number; game: Game }): Score {
+    return new Score(userId, point, game);
   }
 }

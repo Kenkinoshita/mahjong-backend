@@ -30,9 +30,12 @@ export class Membership {
   @CreateDateColumn({ name: 'registered_at', type: 'timestamptz', comment: '登録日時' })
   registeredAt!: Date;
 
-  constructor(id: number, group: Group, userId: number) {
-    this.id = id;
+  private constructor(group: Group, userId: number) {
     this.group = group;
     this.userId = userId;
+  }
+
+  static create({ group, userId }: { group: Group; userId: number }): Membership {
+    return new Membership(group, userId);
   }
 }

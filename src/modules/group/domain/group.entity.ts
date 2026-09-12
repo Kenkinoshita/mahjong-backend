@@ -21,9 +21,12 @@ export class Group {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz', comment: '更新日時' })
   updatedAt!: Date;
 
-  constructor(id: number, name: string, memberShips: Membership[]) {
-    this.id = id;
+  private constructor(name: string, memberShips: Membership[]) {
     this.name = name;
     this.memberShips = memberShips;
+  }
+
+  static create({ name, memberShips }: { name: string; memberShips: Membership[] }): Group {
+    return new Group(name, memberShips);
   }
 }

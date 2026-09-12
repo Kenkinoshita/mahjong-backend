@@ -36,13 +36,30 @@ export class Game {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamptz', comment: '更新日時' })
   updatedAt!: Date;
 
-  constructor(id: number, name: string, uma: Uma, oka: Oka, description: string, groupId: number, playedAt: Date) {
-    this.id = id;
+  private constructor(name: string, uma: Uma, oka: Oka, description: string, groupId: number, playedAt: Date) {
     this.name = name;
     this.uma = uma;
     this.oka = oka;
     this.description = description;
     this.groupId = groupId;
     this.playedAt = playedAt;
+  }
+
+  static create({
+    name,
+    uma,
+    oka,
+    description,
+    groupId,
+    playedAt,
+  }: {
+    name: string;
+    uma: Uma;
+    oka: Oka;
+    description: string;
+    groupId: number;
+    playedAt: Date;
+  }): Game {
+    return new Game(name, uma, oka, description, groupId, playedAt);
   }
 }
