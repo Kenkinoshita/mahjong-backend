@@ -11,3 +11,8 @@ database.sqlite
 
 # port-forward
 cmd/port-foward/dev.sh
+
+# env
+.env
+.env.*
+!.env.sample

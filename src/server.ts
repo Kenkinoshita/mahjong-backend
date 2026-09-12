@@ -3,8 +3,9 @@ import 'reflect-metadata';
 import { serve } from '@hono/node-server';
 import app from '@/app';
 import { AppDataSource } from '@/dataSource';
+import { env } from '@/shared/configs/env';
 
-const port = Number(process.env.PORT || 3000);
+const port = env.PORT;
 
 // eslint-disable-next-line no-console
 console.log(`Listening on port :${port}`);

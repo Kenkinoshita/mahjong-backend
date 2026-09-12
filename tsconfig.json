@@ -21,6 +21,6 @@
       "@common/*": ["./common/src/*"]
     }
   },
-  "include": ["src/**/*", "test/**/*", "common/src/**/*", "vitest.config.ts"],
+  "include": ["src/**/*", "scripts/**/*", "test/**/*", "common/src/**/*", "vitest.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
