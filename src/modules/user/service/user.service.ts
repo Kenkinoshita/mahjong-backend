@@ -2,6 +2,7 @@ import type { CreateUserInputDto, CreateUserOutputDto } from '@/modules/user/ser
 import { ApiError } from '@/shared/errors/apiError';
 import { User } from '@/modules/user/domain/user.entity';
 import type { GetUserInputDto, GetUserOutputDto } from '@/modules/user/service/dto/getUser.dto';
+import type { GetUsersResponse } from '@common/schemas/users/response/getUsersResponseSchema';
 import type { Repository } from 'typeorm';
 
 export class UserService {
@@ -20,6 +21,14 @@ export class UserService {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) throw ApiError.notFound('User not found');
     return { id: user.id, name: user.name, email: user.email, password: user.password };
+  }
+
+  async getUsers(): Promise<GetUsersResponse> {
+    const users = await this.userRepository.find({
+      select: ['id', 'name', 'email'],
+      order: { id: 'ASC' },
+    });
+    return users.map(({ id, name, email }) => ({ id, name, email }));
   }
 
   async getUserByEmail(email: string): Promise<GetUserOutputDto | null> {

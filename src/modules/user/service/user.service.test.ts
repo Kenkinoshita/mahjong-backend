@@ -10,6 +10,7 @@ const input = { name: 'Test User', email: 'test@example.com', hashedPassword: 'h
 function setup() {
   const repository = {
     findOne: vi.fn<Repository<User>['findOne']>().mockResolvedValue(null),
+    find: vi.fn<Repository<User>['find']>().mockResolvedValue([]),
     save: vi.fn().mockResolvedValue({ id: 42 }),
   };
   return { repository, service: new UserService(repository as unknown as Repository<User>) };
@@ -43,5 +44,29 @@ describe('UserService.createUser', () => {
     const error = new Error('Database unavailable');
     repository.save.mockRejectedValue(error);
     await expect(service.createUser(input)).rejects.toBe(error);
+  });
+});
+
+describe('UserService.getUsers', () => {
+  it('returns only public fields in ID order', async () => {
+    const { repository, service } = setup();
+    repository.find.mockResolvedValue([
+      { id: 2, name: '佐藤', email: 'sato@example.com', password: 'secret' } as User,
+      { id: 3, name: '田中', email: 'tanaka@example.com', password: 'secret' } as User,
+    ]);
+
+    await expect(service.getUsers()).resolves.toEqual([
+      { id: 2, name: '佐藤', email: 'sato@example.com' },
+      { id: 3, name: '田中', email: 'tanaka@example.com' },
+    ]);
+    expect(repository.find).toHaveBeenCalledWith({
+      select: ['id', 'name', 'email'],
+      order: { id: 'ASC' },
+    });
+  });
+
+  it('returns an empty array when no users exist', async () => {
+    const { service } = setup();
+    await expect(service.getUsers()).resolves.toEqual([]);
   });
 });
