@@ -12,6 +12,7 @@ function setup() {
   const repository = {
     findOne: vi.fn<Repository<User>['findOne']>().mockResolvedValue(null),
     find: vi.fn<Repository<User>['find']>().mockResolvedValue([]),
+    delete: vi.fn().mockResolvedValue({ affected: 1 }),
     save: vi.fn().mockResolvedValue({ id: 42 }),
   };
   return { repository, service: new UserService(repository as unknown as Repository<User>) };
@@ -67,5 +68,18 @@ describe('UserService.getUsers', () => {
   it('returns an empty array when no users exist', async () => {
     const { service } = setup();
     await expect(service.getUsers()).resolves.toEqual([]);
+  });
+});
+
+describe('UserService.deleteUser', () => {
+  it('deletes the specified user', async () => {
+    const { repository, service } = setup();
+    await expect(service.deleteUser(42)).resolves.toBeUndefined();
+    expect(repository.delete).toHaveBeenCalledWith({ id: 42 });
+  });
+  it('rejects a missing user', async () => {
+    const { repository, service } = setup();
+    repository.delete.mockResolvedValue({ affected: 0 });
+    await expect(service.deleteUser(42)).rejects.toMatchObject({ code: 'NOT_FOUND' });
   });
 });

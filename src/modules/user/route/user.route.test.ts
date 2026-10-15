@@ -10,6 +10,7 @@ vi.mock('@/shared/middlewares/cookieGuard', () => ({
 
 function setup() {
   const service = {
+    deleteUser: vi.fn<UserService['deleteUser']>().mockResolvedValue(undefined),
     getUsers: vi.fn<UserService['getUsers']>().mockResolvedValue([]),
     createUser: vi.fn<UserService['createUser']>().mockResolvedValue({ id: 42 }),
   };
@@ -61,4 +62,21 @@ describe('POST /api/users', () => {
     expect(response.status).toBe(400);
     expect(service.createUser).not.toHaveBeenCalled();
   });
+});
+
+describe('DELETE /api/users/:id', () => {
+  it('deletes a user and returns no content', async () => {
+    const { service, app } = setup();
+    const response = await app.request('/api/users/42', { method: 'DELETE' });
+    expect(response.status).toBe(204);
+    expect(service.deleteUser).toHaveBeenCalledWith(42);
+  });
+  it.each(['abc', '0', '-1', '1.5', '1e2', '0x2a', 'Infinity', '9007199254740992'])(
+    'rejects invalid ID %s',
+    async (id) => {
+      const { service, app } = setup();
+      expect((await app.request(`/api/users/${id}`, { method: 'DELETE' })).status).toBe(400);
+      expect(service.deleteUser).not.toHaveBeenCalled();
+    },
+  );
 });

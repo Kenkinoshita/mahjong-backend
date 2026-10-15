@@ -33,6 +33,11 @@ export class UserService {
     return users.map(({ id, name, email }) => ({ id, name, email }));
   }
 
+  async deleteUser(userId: number): Promise<void> {
+    const result = await this.userRepository.delete({ id: userId });
+    if (!result.affected) throw ApiError.notFound('User not found');
+  }
+
   async getUserByEmail(email: string): Promise<GetUserOutputDto | null> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) return null;
