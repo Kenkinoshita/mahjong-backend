@@ -1,7 +1,7 @@
 export type CreateUserInputDto = {
   name: string;
   email: string;
-  hashedPassword: string;
+  password: string;
 };
 
 export type CreateUserOutputDto = { id: number };
