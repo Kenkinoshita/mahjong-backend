@@ -1,19 +1,5 @@
 import { AppDataSource } from '@/dataSource';
 import { Group } from '@/modules/group/domain/group.entity';
-import { txStore } from '@/shared/stores/transaction.store';
-import type { FindManyOptions, FindOneOptions } from 'typeorm';
+import { withTransaction } from '@/shared/repositories/withTransaction';
 
-const originalRepository = AppDataSource.getRepository(Group);
-
-export const groupRepository = originalRepository.extend({
-  async findOne(options: FindOneOptions<Group>): Promise<Group | null> {
-    const manager = txStore.getStore()?.manager;
-    const repository = !manager ? originalRepository : manager.getRepository(Group);
-    return await repository.findOne(options);
-  },
-  async find(options?: FindManyOptions<Group>): Promise<Group[]> {
-    const manager = txStore.getStore()?.manager;
-    const repository = !manager ? originalRepository : manager.getRepository(Group);
-    return await repository.find(options);
-  },
-});
+export const groupRepository = withTransaction(AppDataSource.getRepository(Group));
